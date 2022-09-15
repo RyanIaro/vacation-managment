@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,8 +28,11 @@ public class VacationController {
     private final EmployeeService employeeService;
 
     @GetMapping("/vacations")
-    public List<Vacation> getAllVacations() {
-        return service.getAll();
+    public List<Vacation> getAllVacations(
+            @RequestParam(value = "purpose", required = false, defaultValue = "") String purpose,
+            @RequestParam(value = "employeeFirstName", required = false, defaultValue = "") String employeeFirstName,
+            @RequestParam(value = "employeeLastName", required = false, defaultValue = "") String employeeLastName) {
+        return service.getByCriteria(purpose, employeeFirstName, employeeLastName);
     }
 
     @PutMapping("/vacations")
