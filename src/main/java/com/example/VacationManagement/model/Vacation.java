@@ -26,9 +26,10 @@ import java.time.LocalDate;
 @ToString
 public class Vacation implements Serializable {
     @Id
-    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idVacation;
+
+    private String purpose;
 
     @Column(nullable = false)
     private LocalDate beginning;
