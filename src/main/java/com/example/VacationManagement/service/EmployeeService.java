@@ -14,12 +14,17 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final EmployeeRepository repository;
 
-    public List<Employee> getAll(String firstName, String lastName) {
+    public List<Employee> getByCriteria(String firstName, String lastName) {
         return repository.findAll()
                 .stream()
-                .filter(employee -> employee.getFirstName().toLowerCase().equals(firstName.toLowerCase())).toList()
+                .filter(employee -> employee.getFirstName()
+                        .toLowerCase()
+                        .contains(firstName.toLowerCase()))
+                .toList()
                 .stream()
-                .filter(employee -> employee.getLastName().toLowerCase().equals(lastName.toLowerCase()))
+                .filter(employee -> employee.getLastName()
+                        .toLowerCase()
+                        .contains(lastName.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
