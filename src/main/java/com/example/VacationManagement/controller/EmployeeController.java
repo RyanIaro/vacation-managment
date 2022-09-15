@@ -18,14 +18,14 @@ public class EmployeeController {
 
     @GetMapping("/")
     public String welcome() {
-        return "Hello wolrd!";
+        return "Hello world!";
     }
 
     @GetMapping("/employees")
     public List<Employee> getEmployees(
-            @RequestParam(value = "first_name", required = false, defaultValue = "") String firstName,
-            @RequestParam(value = "last_name", required = false, defaultValue = "") String lastName) {
-        return service.getAll(firstName, lastName);
+            @RequestParam(value = "firstName", required = false, defaultValue = "") String firstName,
+            @RequestParam(value = "lastName", required = false, defaultValue = "") String lastName) {
+        return service.getByCriteria(firstName, lastName);
     }
 
     @PutMapping("/employees")
